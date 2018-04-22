@@ -5,6 +5,11 @@
 
   let domain = 'p7hgnuu8t.bkt.clouddn.com';
 
+  //获取存储的所有图片
+  if ($('#content .index')){
+    getAllImage();
+  }
+
   $.ajax({
     type: 'get',
     url: '/api/token',
@@ -35,10 +40,14 @@
             plupload.each(files, function(file) {
               var trCont = `<tr><td>${++index}</td><td>${
                 file.name
-              }</td><td class="${file.id}"></td><td>${ToMBorKB(file.size).size} ${ToMBorKB(file.size).sig}</td>
+              }</td><td class="${file.id}"></td><td>${
+                ToMBorKB(file.size).size
+              } ${ToMBorKB(file.size).sig}</td>
               <td>
                 <div class="progress">
-                  <div class="progress-bar file-${file.id}" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar file-${
+                    file.id
+                  }" role="progressbar" aria-valuemin="0" aria-valuemax="100">
                     0%
                   </div>
                 </div>
@@ -52,8 +61,8 @@
           UploadProgress: function(up, file) {
             // 每个文件上传时,处理相关的事情
             var percent = file.percent;
-            $(".progress .file-" + file.id).css('width',percent + '%');
-            $(".progress .file-" + file.id).text(percent + '%');
+            $('.progress .file-' + file.id).css('width', percent + '%');
+            $('.progress .file-' + file.id).text(percent + '%');
           },
           FileUploaded: function(up, file, info) {
             // 每个文件上传成功后,处理相关的事情
@@ -71,14 +80,18 @@
             img.src = sourceLink;
             img.height = 50;
             img.width = 50;
-            $('.'+file.id).append(img);
-
+            $('.' + file.id).append(img);
           },
           Error: function(up, err, errTip) {
             //上传出错时,处理相关的事情
           },
           UploadComplete: function() {
             //队列文件处理完毕后,处理相关的事情
+
+            //如果在index.html界面
+            if ($('#content .index')) {
+              getAllImage();
+            }
           },
           Key: function(up, file) {
             // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
@@ -97,22 +110,55 @@
     }
   });
 
+  //获取七牛云存储的图片并展示
+  function getAllImage() {
+    $.ajax({
+      type: 'get',
+      url: '/api/list',
+      dataType: 'json',
+      success: function(data) {
+        let html = '';
+        let size = 6; //图片每行的个数
+        let result = sliceArray(data, size);
+
+        for (let i = 0, l = result.length; i < l; i++) {
+          html += `<div class="row">`;
+          for (let j = 0, z = result[i].length; j < z; j++) {
+            let sourceKey = 'http://' + domain + '/' + result[i][j].key;
+            html += `<div class="col-md-2" style="background: url(${sourceKey}) center center no-repeat;background-size: cover;background-clip:content-box;">
+                    <a class="imginfo" href="imginfo.html?sourcekey=${sourceKey}"></a>
+                  </div>`;
+          }
+          html += `</div>`;
+        }
+
+        $('#content .container-fluid').html(html);
+      }
+    });
+  }
+
   //点击隐藏上传表
   $('.dialog-control').click(function() {
     $('.dialog').removeClass('show');
   });
-
-  function ToMBorKB(size){
-    if(size / 1024 > 500){
-      return {size:Math.ceil(size / 1024 / 1024),sig:'mb'}
-    }else{
-      return {size:Math.ceil(size / 1024),sig:'kb'}
+  //字节转MB或者KB
+  function ToMBorKB(size) {
+    if (size / 1024 > 500) {
+      return { size: Math.ceil(size / 1024 / 1024), sig: 'mb' };
+    } else {
+      return { size: Math.ceil(size / 1024), sig: 'kb' };
     }
   }
-
+  //将数组分成等长的几个小数组
+  function sliceArray(data, size) {
+    var result = [];
+    for (let i = 0, l = data.length; i < l; i += size) {
+      result.push(data.slice(i, i + size));
+    }
+    return result;
+  }
 })();
 
 // domain 为七牛空间（bucket)对应的域名，选择某个空间后，可通过"空间设置->基本设置->域名设置"查看获取
 
 // uploader 为一个plupload对象，继承了所有plupload的方法，参考http://plupload.com/docs
-
