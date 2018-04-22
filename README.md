@@ -1,3 +1,10 @@
 # PicShow
 
-## 基于七牛实现一个简单的相册
+## How to use
+
+```shell
+node app.js
+```
+
+Your URL : localhost:8080/template
+
