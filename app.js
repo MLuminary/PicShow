@@ -14,6 +14,8 @@ http.createServer(app).listen(8080);
 app.use(express.static('public'));
 
 //向客户端提供token
-app.get('/api/token', api.send_token)
+app.get('/api/token', api.send_token);
 
-app.get('/api/list', api.getAllImage)
+app.get('/api/list', api.getAllImage);
+
+app.post('/api/download', api.download);

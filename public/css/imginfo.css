@@ -1,0 +1,26 @@
+#content .container {
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  padding: 0 15px 15px 15px;
+  margin-bottom: 70px;
+}
+
+#content .container .imgBox {
+  padding: 15px;
+}
+
+#content .container .imgName {
+  font-size: 2rem;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#content .container .imgMsg{
+  margin-top: 15px;
+}
+
+#canvas {
+  display: none;
+}

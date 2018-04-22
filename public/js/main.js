@@ -6,7 +6,7 @@
   let domain = 'p7hgnuu8t.bkt.clouddn.com';
 
   //获取存储的所有图片
-  if ($('#content .index')){
+  if ($('#content .index')) {
     getAllImage();
   }
 
@@ -124,7 +124,9 @@
         for (let i = 0, l = result.length; i < l; i++) {
           html += `<div class="row">`;
           for (let j = 0, z = result[i].length; j < z; j++) {
-            let sourceKey = 'http://' + domain + '/' + result[i][j].key;
+            
+            let sourceKey = 'http://' + domain + '/' + encodeURI (result[i][j].key);
+
             html += `<div class="col-md-2" style="background: url(${sourceKey}) center center no-repeat;background-size: cover;background-clip:content-box;">
                     <a class="imginfo" href="imginfo.html?sourcekey=${sourceKey}"></a>
                   </div>`;
@@ -158,7 +160,3 @@
     return result;
   }
 })();
-
-// domain 为七牛空间（bucket)对应的域名，选择某个空间后，可通过"空间设置->基本设置->域名设置"查看获取
-
-// uploader 为一个plupload对象，继承了所有plupload的方法，参考http://plupload.com/docs

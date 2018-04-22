@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>NewShow</title>
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/imginfo.css">
+</head>
+
+<body>
+  <div id="header"></div>
+  <div id="footer"></div>
+  <div id="content">
+    <div class="container">
+      <div class="row imgBox"></div>
+      <div class="row imgMsg">
+        <div class="col-md-5 imgName"></div>
+        <div class="col-md-2 col-md-offset-5">
+          <a class="btn btn-success imgUrl">
+            <span class="glyphicon glyphicon-save"></span> download</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dialog">
+    <h5>
+      <div class="dialog-title">
+        <span class="completxt">
+          有1个文件上传成功
+        </span>
+      </div>
+    </h5>
+    <div class="dialog-control">
+      <span class="glyphicon glyphicon-chevron-down"></span>
+    </div>
+    <div class="container">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <td class="col-md-1">#</td>
+            <td class="col-md-4">名称</td>
+            <td class="col-md-2">缩略图</td>
+            <td class="col-md-2">大小</td>
+            <td class="col-md-3">进度</td>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr>
+                  <td>1</td>
+                  <td>名称</td>
+                  <td>缩略图</td>
+                  <td>大小</td>
+                  <td>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                          60%
+                        </div>
+                    </div>
+                  </td>
+                </tr> -->
+        </tbody>
+      </table>
+    </div>
+    <div class="dialog-start">
+      <button class="btn btn-primary start-upload">开始上传</button>
+    </div>
+  </div>
+  <div id="add" class="add">
+    <span class="icon" aria-hidden="true">＋</span>
+  </div>
+  <canvas id="canvas"></canvas>
+  <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="../static//plupload.full.min.js"></script>
+  <script src="../static/qiniu.min.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/imginfo.js"></script>
+</body>
+
+</html>
