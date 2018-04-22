@@ -1,0 +1,24 @@
+body { 
+  padding-top: 70px; 
+  font-family: "PingFang SC"
+}
+.foot-txt {
+  line-height: 50px;
+}
+.add {
+  position: fixed;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  background-color: #000;
+  border-radius: 50%;
+  line-height: 40px;
+  cursor: pointer;
+  right: 50px;
+  bottom: 100px;
+}
+
+.add .icon {
+  color: #fff;
+  font-size: 30px;
+}
