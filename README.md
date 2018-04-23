@@ -6,5 +6,5 @@
 node app.js
 ```
 
-Your URL : localhost:8080/template
+Your URL: localhost:8080/template
 

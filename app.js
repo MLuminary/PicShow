@@ -18,4 +18,4 @@ app.get('/api/token', api.send_token);
 
 app.get('/api/list', api.getAllImage);
 
-app.post('/api/download', api.download);
+// app.post('/api/download', api.download);

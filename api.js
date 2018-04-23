@@ -39,24 +39,26 @@ module.exports = {
       res.json(respBody.items);
     });
   },
-  //图片下载
-  download: function(req, res) {
-    req.on('data',function(buf){
-      var obj = qs.parse(buf.toString());
+  //图片下载 
+  //图片下载有个想法，是获取图片然后转为流发送到前端触发下载，后来直接在服务器就下载了....
+  // download: function(req, res) {
+  //   req.on('data',function(buf){
+  //     var obj = qs.parse(buf.toString());
 
-      res.set({
-        "Content-type":"application/octet-stream",
-        "Content-Disposition":"attachment;filename="+encodeURI(obj.key)
-      });
+  //     res.set({
+  //       "Content-type":"application/octet-stream",
+  //       "Content-Disposition":"attachment;filename="+encodeURI(obj.key)
+  //     });
 
-      var publicDownloadUrl = bucketManager.publicDownloadUrl(domain, obj.key);
-      var ImgPath = 'http://' + publicDownloadUrl;
+  //     //获取图片url
+  //     var publicDownloadUrl = bucketManager.publicDownloadUrl(domain, obj.key);
+  //     var ImgPath = 'http://' + publicDownloadUrl;
       
-      //下载到服务器
-      var ImgStream = request(ImgPath).pipe(fs.createWriteStream(obj.key));
+  //     //下载到服务器
+  //     var ImgStream = request(ImgPath).pipe(fs.createWriteStream(obj.key));
 
-      res.json(ImgPath);
+  //     res.json(ImgPath);
      
-    })
-  }
+  //   })
+  // }
 };
